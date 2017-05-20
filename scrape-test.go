@@ -7,17 +7,22 @@ import (
 )
 
 func main() {
-	doc, err := goquery.NewDocument("http://sense-sapporo.jp/release")
+
+	doc, err := goquery.NewDocument("https://www.monstercat.com/music")
 	if err != nil {
 		fmt.Print("url scarapping failed")
 	}
-	doc.Find(".release_content_text").Each(func(i int, s *goquery.Selection) {
 
-		title := s.Find(".content_title_single").Text()
+	doc.Find("section[role=\"content\"]").Each(func(i int, s *goquery.Selection) {
+
+		s.Find("div > div > ul > li").Each(func(n int, p *goquery.Selection) {
+			tex := p.Find("a").Text()
+			fmt.Print(tex)
+		})
 
 		url, _ := s.Find("a").Attr("href")
 
-		fmt.Println(title, url)
+		fmt.Println(url)
 	})
 
 	/*
