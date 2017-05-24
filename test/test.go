@@ -24,5 +24,13 @@ func main() {
 
 	fmt.Println("要素数は", len(hai))
 	/*--------文字列操作----------*/
+	a := "Hello"
+	b := "world"
+	c := `
+    This is a test.
+
+    GoLang, programming language developed at Google.
+    `
+	fmt.Print(a + b + c + "\n")
 
 }
