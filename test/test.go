@@ -31,6 +31,6 @@ func main() {
 
     GoLang, programming language developed at Google.
     `
-	fmt.Print(a + b + c + "\n")
+	fmt.Print(a + b + c + "hal\n")
 
 }
