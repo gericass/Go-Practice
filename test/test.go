@@ -26,11 +26,12 @@ func main() {
 	/*--------文字列操作----------*/
 	a := "Hello"
 	b := "world!"
+	d := "Today"
 	c := `
     This is a test.
 
     GoLang, programming language developed at Google.
     `
-	fmt.Print(a + b + c + "hal\n")
+	fmt.Print(a + b + c + d + "hal\n")
 
 }
