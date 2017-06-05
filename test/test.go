@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 GoではArray(配列)はあまり使わずにsliceを使う
@@ -24,5 +26,8 @@ func main() {
 
 	fmt.Println("要素数は", len(hai))
 	/*--------文字列操作----------*/
+	fmt.Println("------------------------------")
+	text := "yeah!めっちゃホリディウキウキな夏希望"
+	fmt.Print(text)
 
 }
