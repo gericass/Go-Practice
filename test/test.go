@@ -26,8 +26,20 @@ func main() {
 
 	fmt.Println("要素数は", len(hai))
 	/*--------文字列操作----------*/
+<<<<<<< HEAD
 	fmt.Println("------------------------------")
 	text := "yeah!めっちゃホリディウキウキな夏希望"
 	fmt.Print(text)
+=======
+	a := "Hello"
+	b := "world!"
+	d := "Today"
+	c := `
+    This is a test.
+
+    GoLang, programming language developed at Google.
+    `
+	fmt.Print(a + b + c + d + "hal\n")
+>>>>>>> cbc858cead2ecbcf6b1d58055bc6e93d079be80e
 
 }
