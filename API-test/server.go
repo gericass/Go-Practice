@@ -4,29 +4,45 @@ import (
 	"net/http"
 
 	"./models"
+
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/labstack/echo"
 )
 
+var db = models.DbConnect() //DBと接続
+
+func SetDb(c echo.Context) error {
+	db.CreateTable(&models.User{}) //テーブルの生成
+
+	return c.String(http.StatusOK, "DB has set!")
+}
+
+func PutDb(c echo.Context) error {
+	name := c.Param("name")
+	user := models.User{Age: 18, Name: name, Num: 50} //INSERTするデータ
+	db.Create(&user)                                  //INSERT
+	return c.String(http.StatusOK, "Put record!")
+}
+
+func UpdateDb(c echo.Context) error { //データの更新
+	user := models.User{}
+	db.Where("name = ?", "geri").First(&user)
+	user.Age = 500
+	db.Save(&user)
+	return c.String(http.StatusOK, "Updated!")
+}
+
 func main() {
 	e := echo.New()
-	db := models.DbConnect()
-	defer db.Close()
+	defer db.Close() //return直前にDBとの接続を解除
 
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	e.GET("/set/", func(c echo.Context) error {
-		db.CreateTable(&models.User{})
-		//db.Set("gorm:table_options", "ENGINE=InnoDB").CreateTable(&models.Test{})
-		return c.String(http.StatusOK, "DB has set!")
-	})
+	e.GET("/set", SetDb)
+	e.GET("/put/:name", PutDb)
+	e.GET("/update", UpdateDb)
 
-	e.GET("/put/", func(c echo.Context) error {
-		user := models.User{Age: 18, Name: "Jinzhu", Num: 50}
-		db.Create(&user) // => returns `true` as primary key is blank
-		return c.String(http.StatusOK, "Put record!")
-	})
 	e.Logger.Fatal(e.Start(":1323"))
 }
