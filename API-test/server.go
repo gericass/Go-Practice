@@ -32,6 +32,16 @@ func UpdateDb(c echo.Context) error { //データの更新
 	return c.String(http.StatusOK, "Updated!")
 }
 
+func MultiUpdate(c echo.Context) error {
+	user := []models.User{}
+	db.Find(&user, "age = ?", 18)
+	text := ""
+	for _, v := range user {
+		text = text + v.Name
+	}
+	return c.String(http.StatusOK, text)
+}
+
 func main() {
 	e := echo.New()
 	defer db.Close() //return直前にDBとの接続を解除
@@ -43,6 +53,7 @@ func main() {
 	e.GET("/set", SetDb)
 	e.GET("/put/:name", PutDb)
 	e.GET("/update", UpdateDb)
+	e.GET("/multi", MultiUpdate)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
