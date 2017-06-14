@@ -2,11 +2,19 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
 /*
 GoではArray(配列)はあまり使わずにsliceを使う
 */
+
+var sl []int
+
+type Food struct {
+	Name  string
+	Price int
+}
 
 func main() {
 	/*----------スライスの書き方----------*/
@@ -26,11 +34,11 @@ func main() {
 
 	fmt.Println("要素数は", len(hai))
 	/*--------文字列操作----------*/
-<<<<<<< HEAD
+
 	fmt.Println("------------------------------")
 	text := "yeah!めっちゃホリディウキウキな夏希望"
 	fmt.Print(text)
-=======
+
 	a := "Hello"
 	b := "world!"
 	d := "Today"
@@ -40,6 +48,20 @@ func main() {
     GoLang, programming language developed at Google.
     `
 	fmt.Print(a + b + c + d + "hal\n")
->>>>>>> cbc858cead2ecbcf6b1d58055bc6e93d079be80e
 
+	sl = append(sl, 1)
+	fmt.Print(sl)
+
+	foods := make([]Food, 3)
+	foods[0] = Food{Name: "みかん", Price: 150}
+	foods[1] = Food{Name: "バナナ", Price: 100}
+	foods[2] = Food{Name: "りんご", Price: 120}
+
+	sort.Slice(foods, func(i, j int) bool {
+		return foods[i].Price < foods[j].Price
+	})
+
+	for _, food := range foods {
+		fmt.Printf("%+v\n", food)
+	}
 }

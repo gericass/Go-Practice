@@ -11,20 +11,20 @@ import (
 
 var db = models.DbConnect() //DBと接続
 
-func SetDb(c echo.Context) error {
+func setDb(c echo.Context) error {
 	db.CreateTable(&models.User{}) //テーブルの生成
 
 	return c.String(http.StatusOK, "DB has set!")
 }
 
-func PutDb(c echo.Context) error {
+func putDb(c echo.Context) error {
 	name := c.Param("name")
 	user := models.User{Age: 18, Name: name, Num: 50} //INSERTするデータ
 	db.Create(&user)                                  //INSERT
 	return c.String(http.StatusOK, "Put record!")
 }
 
-func UpdateDb(c echo.Context) error { //データの更新
+func updateDb(c echo.Context) error { //データの更新
 	user := models.User{}
 	db.Where("name = ?", "geri").First(&user)
 	user.Age = 500
@@ -32,7 +32,7 @@ func UpdateDb(c echo.Context) error { //データの更新
 	return c.String(http.StatusOK, "Updated!")
 }
 
-func MultiUpdate(c echo.Context) error {
+func multiUpdate(c echo.Context) error {
 	user := []models.User{}
 	db.Find(&user, "age = ?", 18)
 	text := ""
@@ -50,10 +50,10 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	e.GET("/set", SetDb)
-	e.GET("/put/:name", PutDb)
-	e.GET("/update", UpdateDb)
-	e.GET("/multi", MultiUpdate)
+	e.GET("/set", setDb)
+	e.GET("/put/:name", putDb)
+	e.GET("/update", updateDb)
+	e.GET("/multi", multiUpdate)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
