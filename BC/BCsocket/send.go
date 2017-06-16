@@ -17,9 +17,9 @@ type Trans struct { //トランザクションデータ
 }
 
 var serverIP = "localhost" //サーバ側のIP
-var serverPort = "8000"    //サーバ側のポート番号
-var myIP = "localhost"     //クライアント側のIP
-var myPort = 4124          //クライアント側のポート番号
+var serverPort = "8888"    //サーバ側のポート番号
+//var myIP = "localhost"     //クライアント側のIP
+//var myPort = 4124 //クライアント側のポート番号
 var myAddr = new(net.TCPAddr)
 var tcpAddr, err = net.ResolveTCPAddr("tcp", serverIP+":"+serverPort)
 

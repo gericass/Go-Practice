@@ -16,7 +16,7 @@ type Food struct {
 	Price int
 }
 
-func main() {
+func kuso() {
 	/*----------スライスの書き方----------*/
 
 	hai := []int{} //[]の中に要素数を書かない

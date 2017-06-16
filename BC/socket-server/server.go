@@ -8,9 +8,15 @@ import (
 	"time"
 )
 
+type un struct {
+	Height string
+	View   string
+}
+
 type jsons struct {
 	Name string `json:"name"`
 	Sex  string `json:"sex"`
+	Dt   un
 }
 
 func main() {
@@ -45,7 +51,7 @@ func handleClient(conn net.Conn) {
 	if err := json.Unmarshal(jsonBytes, &js); err != nil {
 		fmt.Println("JSON Unmarshal error:", err)
 	}
-	fmt.Println(js.Name)
+	fmt.Println(js.Dt.Height)
 
 	conn.Close()
 }
