@@ -1,17 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
-var tekito = []int{4, 5, 6}
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, World")
+}
 
 func main() {
-	for i := 0; i < 5; i++ {
-		for j := 0; j < 2; j++ {
-			if j == 1 {
-				break
-			}
-			fmt.Println("j:", j)
-		}
-		fmt.Println("i:", i)
-	}
+	http.HandleFunc("/", handler) // ハンドラを登録してウェブページを表示させる
+	http.ListenAndServe(":8080", nil)
 }

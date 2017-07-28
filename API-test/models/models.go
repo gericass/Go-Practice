@@ -13,7 +13,7 @@ type User struct {
 }
 
 func DbConnect() *gorm.DB {
-	db, err := gorm.Open("postgres", "host=localhost user=postgres dbname=postgres sslmode=disable password=Keita9156")
+	db, err := gorm.Open("postgres", "host=localhost user=Keita dbname=postgres sslmode=disable password=Keita9156")
 	if err != nil {
 		panic("だめぽ")
 	}
